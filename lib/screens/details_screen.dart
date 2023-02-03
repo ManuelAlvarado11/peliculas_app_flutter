@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas_app/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -14,6 +15,14 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 const _PostAndTitle(),
+                const _OverView(),
+                const _OverView(),
+                const _OverView(),
+                const _OverView(),
+                const _OverView(),
+                const _OverView(),
+                const SizedBox(height: 10),
+                const CastingCards()
               ],
             ),
           )
@@ -43,6 +52,7 @@ class _CustomAppBar extends StatelessWidget {
         title: Container(
           width: double.infinity,
           alignment: Alignment.bottomCenter,
+          padding: const EdgeInsets.only(bottom: 10),
           color: Colors.black45,
           child: const Text(
             'movie.name',
@@ -60,6 +70,7 @@ class _CustomAppBar extends StatelessWidget {
   }
 }
 
+// Widget de ficha informativa
 class _PostAndTitle extends StatelessWidget {
   const _PostAndTitle({super.key});
 
@@ -112,6 +123,23 @@ class _PostAndTitle extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+// Widget de descripcion
+class _OverView extends StatelessWidget {
+  const _OverView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Text(
+        'Adipisicing sit dolore ullamco consectetur fugiat et sint amet irure irure aute nulla. Duis culpa ipsum deserunt ex. Et id minim aute commodo deserunt eu duis qui sunt id ullamco.',
+        textAlign: TextAlign.justify,
+        style: Theme.of(context).textTheme.subtitle1,
       ),
     );
   }
