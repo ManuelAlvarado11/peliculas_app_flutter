@@ -33,6 +33,12 @@ class Movie {
     required this.voteCount,
   });
 
+  get fullPosterImg {
+    return posterPath != null
+        ? 'https://image.tmdb.org/t/p/w500$posterPath'
+        : 'https://i.stack.imgur.com/GNhxO.png';
+  }
+
   factory Movie.fromRawJson(String str) => Movie.fromJson(json.decode(str));
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
