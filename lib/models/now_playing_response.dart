@@ -16,9 +16,11 @@ class NowPlayingResponse {
     required this.totalResults,
   });
 
+  // Decodifica el RawJson en una Instancia de la clase
   factory NowPlayingResponse.fromRawJson(String str) =>
       NowPlayingResponse.fromJson(json.decode(str));
 
+  // Decodifica el Json en una Instancia de la clase
   factory NowPlayingResponse.fromJson(Map<String, dynamic> json) =>
       NowPlayingResponse(
         dates: Dates.fromJson(json["dates"]),
@@ -39,8 +41,10 @@ class Dates {
     required this.minimum,
   });
 
+  // Decodifica el RawJson en una Instancia de la clase
   factory Dates.fromRawJson(String str) => Dates.fromJson(json.decode(str));
 
+  // Decodifica el Json en una Instancia de la clase
   factory Dates.fromJson(Map<String, dynamic> json) => Dates(
         maximum: DateTime.parse(json["maximum"]),
         minimum: DateTime.parse(json["minimum"]),

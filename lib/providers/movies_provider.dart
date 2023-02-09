@@ -7,29 +7,51 @@ class MoviesProvider extends ChangeNotifier {
   final String _baseUrl = 'api.themoviedb.org';
   final String _lenguage = 'es-ES';
   List<Movie> onDisplayMovies = [];
+  List<Movie> onPopularMovies = [];
+  int _popularPage = 0;
 
   MoviesProvider() {
     getOnDisplayMovies();
+    getPopularMovies();
   }
 
-  // ********** GET MOVIES ********
-  getOnDisplayMovies() async {
+  Future<String> _getJsonData(String endPoint, [int page = 1]) async {
     // URL Backend
-    var url = Uri.https(_baseUrl, '3/movie/now_playing', {
+    var url = Uri.https(_baseUrl, endPoint, {
       'api_key': _apiKey,
       'lenguage': _lenguage,
-      'page': '1',
+      'page': '$page',
     });
 
     // Peticion Http
     final response = await http.get(url);
+    return response.body;
+  }
 
-    // Formatear JSON en un Model
-    final nowPlayingResponse = NowPlayingResponse.fromRawJson(response.body);
+  // ********** GET MOVIES ********
+  getOnDisplayMovies() async {
+    //Obtener Response Data
+    final body = await _getJsonData('3/movie/now_playing');
 
+    // Formatear JSON (SIN PROCESAR) en un Model
+    final nowPlayingResponse = NowPlayingResponse.fromRawJson(body);
     onDisplayMovies = nowPlayingResponse.results;
-    // Redibuja los widget en base a los cambios de la clase AppState (Provider)
 
+    // Redibuja los widget en base a los cambios de la clase AppState (Provider)
+    notifyListeners();
+  }
+
+  getPopularMovies() async {
+    _popularPage++;
+    //Obtener Response Data
+    final body = await _getJsonData('3/movie/popular', _popularPage);
+
+    // Formatear JSON (SIN PROCESAR) en un Model
+    final popularResponse = PopularResponse.fromRawJson(body);
+
+    onPopularMovies = [...onPopularMovies, ...popularResponse.results];
+
+    // Redibuja los widget en base a los cambios de la clase AppState (Provider)
     notifyListeners();
   }
 }
