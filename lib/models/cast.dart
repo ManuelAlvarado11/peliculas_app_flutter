@@ -10,11 +10,11 @@ class Cast {
     required this.originalName,
     required this.popularity,
     this.profilePath,
-    this.castId,
-    this.character,
+    required this.castId,
+    required this.character,
     required this.creditId,
-    this.order,
-    this.department,
+    required this.order,
+    required this.department,
     this.job,
   });
 
