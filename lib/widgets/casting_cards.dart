@@ -35,16 +35,17 @@ class CastingCards extends StatelessWidget {
         // Obtener data de la peticcion HTTP
         final cast = snapshot.data!;
 
-        return Container(
-          margin: const EdgeInsets.only(bottom: 40),
+        return SizedBox(
           width: double.infinity,
-          height: 170,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (_, index) {
-              return _CastCard(cast: cast[index]);
-            },
+          height: 200,
+          child: Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: cast.length,
+              itemBuilder: (_, index) {
+                return _CastCard(cast: cast[index]);
+              },
+            ),
           ),
         );
       },
@@ -63,28 +64,29 @@ class _CastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 170,
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      child: Column(children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: FadeInImage(
-            placeholder: const AssetImage('assets/no-image.jpg'),
-            image: NetworkImage(cast.fullProfileImg),
-            width: 110,
-            height: 130,
-            fit: BoxFit.cover,
+      width: 110,
+      height: 200,
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: FadeInImage(
+              width: 110,
+              height: 140,
+              fit: BoxFit.cover,
+              placeholder: const AssetImage('assets/no-image.jpg'),
+              image: NetworkImage(cast.fullProfileImg),
+            ),
           ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          cast.name,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.center,
-          maxLines: 2,
-        )
-      ]),
+          const SizedBox(height: 5),
+          Text(
+            cast.name,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          )
+        ],
+      ),
     );
   }
 }

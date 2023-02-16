@@ -68,12 +68,18 @@ class _SuggestionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Asignacion de Hero ID (Unico) para animacion
+    movie.heroId = 'search-${movie.id}';
+
     return ListTile(
-      leading: FadeInImage(
-        image: NetworkImage(movie.fullPosterImg),
-        placeholder: const AssetImage('assets/no-image.jpg'),
-        width: 50,
-        fit: BoxFit.contain,
+      leading: Hero(
+        tag: movie.heroId!,
+        child: FadeInImage(
+          image: NetworkImage(movie.fullPosterImg),
+          placeholder: const AssetImage('assets/no-image.jpg'),
+          width: 50,
+          fit: BoxFit.contain,
+        ),
       ),
       title: Text(movie.title),
       subtitle: Text(movie.originalTitle),
