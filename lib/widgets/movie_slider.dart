@@ -37,7 +37,7 @@ class _MovieSliderState extends State<MovieSlider> {
     // Carrusel Horizontal
     return SizedBox(
       width: double.infinity,
-      height: 260,
+      height: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -89,7 +89,7 @@ class _MoviePoster extends StatelessWidget {
     // Poster de pelicula
     return Container(
       width: 130,
-      height: 190,
+      height: 250,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
@@ -103,7 +103,7 @@ class _MoviePoster extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: FadeInImage(
                   width: 130,
-                  height: 190,
+                  height: 200,
                   fit: BoxFit.cover,
                   placeholder: const AssetImage('assets/no-image.jpg'),
                   image: NetworkImage(movie.fullPosterImg),
